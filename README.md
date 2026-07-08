@@ -1,4 +1,4 @@
-# BrandPulse: Yapay Zekâ Destekli Marka Lansman Asistanı 🚀
+# BrandPulse: Yapay Zekâ Destekli Marka Lansman Asistanı 
 
 BrandPulse, markaların hedef kitle analizinden başlayarak kişiselleştirilmiş çok kanallı (Instagram, E-posta, Web) içerik üretimine ve hatta yapay zekâ tabanlı görsel kurgulamaya kadar olan tüm pazarlama iletişim süreçlerini otomatize eden gelişmiş bir asistan aracıdır. **Samsung Hackathon** kapsamında geliştirilmiştir.
 
