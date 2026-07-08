@@ -52,5 +52,4 @@ Gemini 3.1 Flash Image yetenekleri kullanılarak, kullanıcıdan gelen ham `prod
    ```
 5. Tarayıcınızdan `http://localhost:5000` adresine giderek uygulamayı kullanmaya başlayabilirsiniz!
 
-## 🔐 Güvenlik
-Bu projede API anahtarları `.env` dosyasında tutulmakta olup `.gitignore` ile repo dışında bırakılmıştır. Kod içerisine kesinlikle doğrudan anahtar (hardcoded) eklenmemiştir.
+
