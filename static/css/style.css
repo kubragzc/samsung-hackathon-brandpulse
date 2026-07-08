@@ -938,7 +938,7 @@ body {
     font-size: 14px;
     color: var(--text-secondary);
     line-height: 1.8;
-    white-space: pre-wrap;
+    white-space: normal;
     word-wrap: break-word;
 }
 
@@ -1418,7 +1418,23 @@ body {
     color: var(--text-secondary);
     line-height: 1.7;
     margin-bottom: var(--space-md);
-    white-space: pre-wrap;
+}
+
+.fc__body p {
+    margin: 0 0 var(--space-sm) 0;
+}
+
+.fc__email-text p,
+.fc__closing p,
+.fc__banner-body p {
+    margin: 0 0 0.35rem 0;
+}
+
+.fc__body p:last-child,
+.fc__email-text p:last-child,
+.fc__closing p:last-child,
+.fc__banner-body p:last-child {
+    margin-bottom: 0;
 }
 
 .fc__cta {
@@ -1478,8 +1494,12 @@ body {
 }
 
 /* Email specific */
+.formatted-content--email {
+    padding-top: var(--space-sm);
+}
+
 .fc__email-field {
-    margin-bottom: var(--space-sm);
+    margin: 0 0 0.35rem 0;
     font-size: 0.95rem;
 }
 
@@ -1492,34 +1512,34 @@ body {
 .fc__divider {
     border: none;
     border-top: 1px solid var(--border-subtle);
-    margin: var(--space-md) 0;
+    margin: 0.45rem 0;
 }
 
 .fc__greeting {
     color: var(--text-secondary);
     font-style: italic;
-    margin-bottom: var(--space-md);
+    margin: 0 0 0.75rem 0;
 }
 
 .fc__email-section {
-    margin-bottom: var(--space-md);
+    margin: 0 0 0.85rem 0;
 }
 
 .fc__email-heading {
     font-size: 1rem;
     font-weight: 700;
     color: var(--accent-1);
-    margin-bottom: var(--space-xs);
+    margin: 0 0 0.35rem 0;
 }
 
 .fc__email-text {
     color: var(--text-secondary);
-    line-height: 1.7;
+    line-height: 1.55;
 }
 
 .fc__email-cta {
     text-align: center;
-    margin: var(--space-lg) 0;
+    margin: 1rem 0;
 }
 
 .fc__email-cta-btn {
@@ -1539,8 +1559,8 @@ body {
     color: var(--text-muted);
     font-size: 0.875rem;
     border-top: 1px solid var(--border-subtle);
-    padding-top: var(--space-md);
-    margin-top: var(--space-md);
+    padding-top: 0.75rem;
+    margin-top: 0.75rem;
 }
 
 /* Web Banner specific */
@@ -1563,7 +1583,7 @@ body {
 
 .fc__banner-body {
     color: var(--text-muted);
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
 }
 
 .fc__banner-cta {
