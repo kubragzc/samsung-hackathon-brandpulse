@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BrandPulse — Yapay zekâ destekli marka lansman ve pazarlama asistanı. Hedef kitle analizi, içerik üretimi ve etik değerlendirme.">
+    <title>BrandPulse — AI Pazarlama Asistanı</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- ═══════════════ AMBIENT BACKGROUND ═══════════════ -->
+    <div class="ambient-bg">
+        <div class="ambient-orb ambient-orb--1"></div>
+        <div class="ambient-orb ambient-orb--2"></div>
+        <div class="ambient-orb ambient-orb--3"></div>
+    </div>
+
+    <!-- ═══════════════ HEADER / NAV ═══════════════ -->
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="header__brand">
+                    <div class="header__logo">
+                        <span class="header__logo-icon">⚡</span>
+                        <span class="header__logo-text">BrandPulse</span>
+                    </div>
+                    <p class="header__tagline">Yapay Zekâ Destekli Marka Lansman Asistanı</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══════════════ PROGRESS STEPS BAR ═══════════════ -->
+    <section class="progress-bar-section">
+        <div class="container">
+            <div class="progress-steps">
+                <div class="progress-step active" data-step="1">
+                    <div class="progress-step__circle">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    </div>
+                    <span class="progress-step__label">Marka Bilgileri</span>
+                </div>
+                <div class="progress-step__line"></div>
+                <div class="progress-step" data-step="2">
+                    <div class="progress-step__circle">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <span class="progress-step__label">Hedef Kitle Analizi</span>
+                </div>
+                <div class="progress-step__line"></div>
+                <div class="progress-step" data-step="3">
+                    <div class="progress-step__circle">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                    </div>
+                    <span class="progress-step__label">İçerik Üretimi</span>
+                </div>
+                <div class="progress-step__line"></div>
+                <div class="progress-step" data-step="4">
+                    <div class="progress-step__circle">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                    </div>
+                    <span class="progress-step__label">Etik Değerlendirme</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ MAIN CONTENT ═══════════════ -->
+    <main class="main">
+        <div class="container">
+
+            <!-- ─────────── STEP 1: BRAND INFO FORM ─────────── -->
+            <section id="step-1" class="step-section active">
+                <div class="section-header fade-in">
+                    <span class="section-badge">Adım 1</span>
+                    <h2 class="section-title">Marka &amp; Ürün Bilgileri</h2>
+                    <p class="section-subtitle">Yapay zekâ analizi için marka ve ürün detaylarınızı girin</p>
+                </div>
+
+                <form id="brand-form" class="glass-card form-card fade-in" autocomplete="off">
+                    <div class="form-grid">
+                        <!-- Brand Name -->
+                        <div class="form-group">
+                            <label class="form-label" for="brand_name">
+                                <span class="form-label__icon">🏢</span> Marka Adı
+                            </label>
+                            <input type="text" id="brand_name" name="brand_name" class="form-input" value="Samsung" required placeholder="Marka adını girin">
+                        </div>
+
+                        <!-- Industry -->
+                        <div class="form-group">
+                            <label class="form-label" for="industry">
+                                <span class="form-label__icon">🏭</span> Sektör
+                            </label>
+                            <input type="text" id="industry" name="industry" class="form-input" value="Teknoloji & Elektronik" required placeholder="Sektörü girin">
+                        </div>
+
+                        <!-- Product Name -->
+                        <div class="form-group">
+                            <label class="form-label" for="product_name">
+                                <span class="form-label__icon">📦</span> Ürün Adı
+                            </label>
+                            <input type="text" id="product_name" name="product_name" class="form-input" value="Galaxy S25 Ultra" required placeholder="Ürün adını girin">
+                        </div>
+
+                        <!-- Target Market -->
+                        <div class="form-group">
+                            <label class="form-label" for="target_market">
+                                <span class="form-label__icon">🌍</span> Hedef Pazar
+                            </label>
+                            <input type="text" id="target_market" name="target_market" class="form-input" value="Türkiye" required placeholder="Hedef pazarı girin">
+                        </div>
+
+                        <!-- Product Description (full width) -->
+                        <div class="form-group form-group--full">
+                            <label class="form-label" for="product_description">
+                                <span class="form-label__icon">📝</span> Ürün Açıklaması
+                            </label>
+                            <textarea id="product_description" name="product_description" class="form-input form-textarea" rows="3" required placeholder="Ürün açıklamasını girin">Samsung Galaxy S25 Ultra, yapay zekâ destekli ProVisual Engine kamera sistemiyle fotoğrafçılığı yeniden tanımlıyor. Snapdragon 8 Elite for Galaxy işlemcisi sayesinde üstün performans ve enerji verimliliği sunuyor. Titanium çerçevesi ve Corning Gorilla Armor 2 ile dayanıklılığı ön plana çıkarıyor.</textarea>
+                        </div>
+
+                        <!-- Knowledge Base (RAG Context) -->
+                        <div class="form-group form-group--full">
+                            <label class="form-label" for="knowledge_base">
+                                <span class="form-label__icon">📚</span> Marka / Ürün Bilgi Bankası (RAG)
+                                <span style="font-size: 0.8em; color: var(--text-muted); font-weight: normal; margin-left: 8px;">(Yapay zekanın halüsinasyon görmesini engellemek için gerçek verileri buraya girin)</span>
+                            </label>
+                            <textarea id="knowledge_base" name="knowledge_base" class="form-input form-textarea" rows="4" placeholder="Örn: Pil 5000mAh, Kamera 200MP, Suya dayanıklı IP68. Ürün fiyatı: 89.999 TL. Markanın geçmiş kampanyası: 'Geceyi Gündüze Çevir' vs.">Pil: 5000 mAh
+Ana Kamera: 200MP
+İşlemci: Snapdragon 8 Elite
+Gövde: Titanium Çerçeve, Gorilla Armor 2
+Ekstra: Geliştirilmiş S Pen deneyimi, Galaxy AI özellikleri, 5x optik zoom, Nightography.</textarea>
+                        </div>
+
+                        <!-- Product Image Upload (Image to Image) -->
+                        <div class="form-group form-group--full">
+                            <label class="form-label" for="product_image">
+                                <span class="form-label__icon">🖼️</span> Ürün Görseli Yükle
+                                <span style="font-size: 0.8em; color: var(--text-muted); font-weight: normal; margin-left: 8px;">(Lansman görseline dönüştürülecek baz görsel)</span>
+                            </label>
+                            <input type="file" id="product_image" name="product_image" class="form-input" accept="image/*">
+                        </div>
+
+                        <!-- Custom Image Prompt (Optional) -->
+                        <div class="form-group form-group--full">
+                            <label class="form-label" for="custom_image_prompt">
+                                <span class="form-label__icon">✨</span> Özel Görsel İsteri (Opsiyonel)
+                                <span style="font-size: 0.8em; color: var(--text-muted); font-weight: normal; margin-left: 8px;">(Boş bırakırsanız yapay zeka ürününüze en uygun sahneyi kendi tasarlar)</span>
+                            </label>
+                            <input type="text" id="custom_image_prompt" name="custom_image_prompt" class="form-input" placeholder="Örn: Telefon kumsalda gün batımında dursun, etrafında neon ışıklar olsun">
+                        </div>
+
+                        <!-- Campaign Goal -->
+                        <div class="form-group">
+                            <label class="form-label" for="campaign_goal">
+                                <span class="form-label__icon">🎯</span> Kampanya Hedefi
+                            </label>
+                            <div class="select-wrapper">
+                                <select id="campaign_goal" name="campaign_goal" class="form-input form-select" required>
+                                    <option value="Lansman/Tanıtım">🚀 Lansman / Tanıtım</option>
+                                    <option value="Marka Bilinirliği">📢 Marka Bilinirliği</option>
+                                    <option value="Satış Artırma">📈 Satış Artırma</option>
+                                    <option value="Müşteri Sadakati">❤️ Müşteri Sadakati</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Brand Tone -->
+                        <div class="form-group">
+                            <label class="form-label" for="brand_tone">
+                                <span class="form-label__icon">🎨</span> Marka Tonu
+                            </label>
+                            <input type="text" id="brand_tone" name="brand_tone" class="form-input" value="Yenilikçi, premium, güvenilir, ilham verici" required placeholder="Marka ses tonunu girin">
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn--primary btn--lg">
+                            <span class="btn__text">🚀 Analizi Başlat</span>
+                            <span class="btn__glow"></span>
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- ─────────── STEP 2: AUDIENCE ANALYSIS ─────────── -->
+            <section id="step-2" class="step-section">
+                <div class="section-header fade-in">
+                    <span class="section-badge">Adım 2</span>
+                    <h2 class="section-title">Hedef Kitle Analizi</h2>
+                    <p class="section-subtitle">Yapay zekâ markanız için en uygun hedef kitleleri belirliyor</p>
+                </div>
+
+                <!-- Loading State -->
+                <div id="step-2-loading" class="loading-state">
+                    <div class="loading-spinner">
+                        <div class="spinner-ring"></div>
+                        <div class="spinner-ring spinner-ring--inner"></div>
+                    </div>
+                    <h3 class="loading-text">Hedef kitle analiz ediliyor...</h3>
+                    <p class="loading-subtext">Yapay zekâ demografik ve psikografik verileri inceliyor</p>
+                    <div class="loading-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+
+                <!-- Results Area -->
+                <div id="step-2-results" class="results-area" style="display:none;">
+                    <div id="segments-grid" class="segments-grid">
+                        <!-- Segment cards will be injected here -->
+                    </div>
+
+                    <div class="step-actions fade-in">
+                        <button type="button" class="btn btn--primary btn--lg" onclick="generateContent()">
+                            <span class="btn__text">✨ İçerik Üretimini Başlat</span>
+                            <span class="btn__glow"></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ─────────── STEP 3: CONTENT GENERATION ─────────── -->
+            <section id="step-3" class="step-section">
+                <div class="section-header fade-in">
+                    <span class="section-badge">Adım 3</span>
+                    <h2 class="section-title">İçerik Üretimi</h2>
+                    <p class="section-subtitle">Her segment için kişiselleştirilmiş pazarlama içerikleri</p>
+                </div>
+
+                <!-- Loading State -->
+                <div id="step-3-loading" class="loading-state">
+                    <div class="loading-spinner">
+                        <div class="spinner-ring"></div>
+                        <div class="spinner-ring spinner-ring--inner"></div>
+                    </div>
+                    <h3 class="loading-text">İçerikler üretiliyor...</h3>
+                    <p class="loading-subtext">Yapay zekâ her segment için özgün içerikler oluşturuyor</p>
+                    <div class="loading-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+
+                <!-- Results Area -->
+                <div id="step-3-results" class="results-area" style="display:none;">
+                    <!-- Segment Tabs -->
+                    <div id="segment-tabs" class="tab-nav">
+                        <!-- Tabs injected dynamically -->
+                    </div>
+
+                    <!-- Content Panels -->
+                    <div id="content-panels" class="content-panels">
+                        <!-- Content panels injected dynamically -->
+                    </div>
+
+                    <div class="step-actions fade-in">
+                        <button type="button" class="btn btn--primary btn--lg" onclick="reviewEthics()">
+                            <span class="btn__text">🛡️ Etik Değerlendirmeyi Başlat</span>
+                            <span class="btn__glow"></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ─────────── STEP 4: ETHICS REVIEW ─────────── -->
+            <section id="step-4" class="step-section">
+                <div class="section-header fade-in">
+                    <span class="section-badge">Adım 4</span>
+                    <h2 class="section-title">Etik Değerlendirme</h2>
+                    <p class="section-subtitle">İçeriklerin etik standartlara uygunluğu değerlendirildi</p>
+                </div>
+
+                <!-- Loading State -->
+                <div id="step-4-loading" class="loading-state">
+                    <div class="loading-spinner">
+                        <div class="spinner-ring"></div>
+                        <div class="spinner-ring spinner-ring--inner"></div>
+                    </div>
+                    <h3 class="loading-text">Etik değerlendirme yapılıyor...</h3>
+                    <p class="loading-subtext">İçerikler etik standartlara göre analiz ediliyor</p>
+                    <div class="loading-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+
+                <!-- Results Area -->
+                <div id="step-4-results" class="results-area" style="display:none;">
+                    <div id="ethics-dashboard" class="ethics-dashboard">
+                        <!-- Ethics report injected dynamically -->
+                    </div>
+
+                    <div class="step-actions fade-in">
+                        <button type="button" class="btn btn--accent btn--lg" onclick="downloadReport()">
+                            <span class="btn__text">📥 Raporu İndir</span>
+                        </button>
+                        <button type="button" class="btn btn--outline btn--lg" onclick="resetAnalysis()">
+                            <span class="btn__text">🔄 Yeni Analiz</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <p class="footer__main">Samsung Innovation Campus · Üretken Yapay Zekâ Hackathon 2025</p>
+                <p class="footer__sub">Powered by <span class="footer__highlight">Google Gemini AI</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════ TOAST NOTIFICATION ═══════════════ -->
+    <div id="toast" class="toast">
+        <span class="toast__icon">✓</span>
+        <span class="toast__text"></span>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
