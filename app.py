@@ -91,7 +91,7 @@ class ImageRequest(BaseModel):
 # Gemini Helpers
 # ---------------------------------------------------------------------------
 
-MODEL_NAME = "gemini-flash-latest"
+MODEL_NAME = "gemini-flash-lite-latest"
 
 
 def _parse_json_response(text: str) -> dict | list:
@@ -208,7 +208,7 @@ async def generate_content(payload: ContentRequest):
         if not segments:
             raise HTTPException(status_code=400, detail="Segment listesi boş.")
 
-        channels = ["instagram"]
+        channels = ["instagram", "email", "web_banner"]
         system_prompt = get_brand_voice_system_prompt(brand_data)
 
         all_content = []

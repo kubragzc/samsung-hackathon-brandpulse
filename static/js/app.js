@@ -393,40 +393,62 @@ function renderContentTabs(contentArray) {
 
     const results = document.getElementById('step-3-results');
     if (results) results.style.display = 'block';
-
-    generateAsyncImages();
-}
-
-async function generateAsyncImages() {
-    const containers = document.querySelectorAll('.async-image-container');
-    
-    for (const container of containers) {
-        const prompt = container.getAttribute('data-prompt');
-        if (!prompt) continue;
-        
-        try {
-            const res = await fetch('/api/generate-image', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    brand_data: state.brandData,
-                    image_prompt: prompt
-                })
-            });
-            
-            const data = await res.json();
-            if (data.success && data.image_base64) {
-                container.innerHTML = `<img src="${data.image_base64}" alt="AI Generated Graphic" loading="lazy" />`;
-            } else {
-                container.innerHTML = `<div class="error-text">Görsel üretilemedi: ${data.detail || 'Bilinmeyen hata'}</div>`;
-            }
-        } catch (err) {
-            container.innerHTML = `<div class="error-text">Görsel üretim hatası: ${err.message}</div>`;
-        }
-    }
 }
 
 /* ═══════════════ FORMAT CONTENT CARD ═══════════════ */
+
+// Kullanıcının yüklediği ürün fotoğrafı varsa görsel çıktısı olarak onu kullan.
+// AI ile görsel üretmek yerine gerçek fotoğrafı göstermek istendiği için
+// pollinations.ai görsel üretimi sadece fotoğraf yüklenmediyse devreye girer.
+const INSTAGRAM_RECOMMENDATION_IMAGE = '/static/assets/instagram-s25-ultra.jpeg';
+
+function getPreviewImageHtml(imagePrompt, width, height, altText, channel) {
+    if (channel === 'instagram') {
+        return `<div class="fc__generated-image"><img src="${INSTAGRAM_RECOMMENDATION_IMAGE}" alt="${escAttr(altText)}" loading="lazy" /></div>`;
+    }
+
+    const uploadedPhoto = state.brandData?.product_image_base64;
+    if (uploadedPhoto) {
+        return `<div class="fc__generated-image"><img src="${uploadedPhoto}" alt="${escAttr(altText)}" loading="lazy" /></div>`;
+    }
+    if (imagePrompt) {
+        const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(imagePrompt)}?width=${width}&height=${height}&nologo=true`;
+        return `<div class="fc__generated-image"><img src="${url}" alt="${escAttr(altText)}" loading="lazy" /></div>`;
+    }
+    return '';
+}
+
+// Gemini çıktısındaki çift satır boşluklarını (bazen çift kaçışlı "\\n" olarak gelir)
+// düzgün paragraflara çevirir; ham "\n\n" satırları büyük boş boşluk bırakmaz.
+function formatMultilineText(text, compact = false) {
+    if (!text) return '';
+    if (!compact) {
+        const normalized = escHtml(String(text)).replace(/\\n/g, '\n');
+        return normalized
+            .split(/\n{2,}/)
+            .map((block) => block.trim())
+            .filter(Boolean)
+            .map((block) => `<p>${block.replace(/\n/g, '<br>')}</p>`)
+            .join('');
+    }
+
+    const normalized = String(text)
+        .replace(/\r\n?/g, '\n')
+        .replace(/\\r\\n|\\n|\\r/g, '\n')
+        .replace(/<br\s*\/?>/gi, '\n')
+        .split('\n')
+        .map((line) => line.trim())
+        .join('\n')
+        .replace(/[ \t]+/g, ' ')
+        .replace(/\n{3,}/g, '\n\n');
+
+    return normalized
+        .split(/\n{2,}/)
+        .map((block) => block.trim())
+        .filter(Boolean)
+        .map((block) => `<p>${escHtml(block).replace(/\n/g, '<br>')}</p>`)
+        .join('');
+}
 
 function formatContentCard(content, channel) {
     if (!content || content.raw_content) {
@@ -447,14 +469,9 @@ function formatContentCard(content, channel) {
 function formatInstagramContent(c) {
     return `
         <div class="formatted-content formatted-content--instagram">
-            ${c.image_prompt ? `<div class="fc__generated-image async-image-container" data-prompt="${escAttr(c.image_prompt)}">
-                <div class="async-image-loader">
-                    <div class="spinner-ring"></div>
-                    <span>Lansman Görseli Üretiliyor...</span>
-                </div>
-            </div>` : ''}
+            ${getPreviewImageHtml(c.image_prompt, 1080, 1080, 'Ürün Görseli', 'instagram')}
             ${c.headline ? `<h3 class="fc__headline">${escHtml(c.headline)}</h3>` : ''}
-            ${c.body ? `<p class="fc__body">${escHtml(c.body)}</p>` : ''}
+            ${c.body ? `<div class="fc__body">${formatMultilineText(c.body)}</div>` : ''}
             ${c.cta ? `<p class="fc__cta">${escHtml(c.cta)}</p>` : ''}
             ${c.hashtags?.length ? `<div class="fc__hashtags">${c.hashtags.map(h => `<span class="fc__hashtag">${escHtml(h)}</span>`).join(' ')}</div>` : ''}
             ${c.visual_description ? `<div class="fc__visual"><span class="fc__visual-label">🎨 Görsel Yönergesi:</span> ${escHtml(c.visual_description)}</div>` : ''}
@@ -466,33 +483,30 @@ function formatInstagramContent(c) {
 
 function formatEmailContent(c) {
     const bodySections = c.body_sections || [];
-    const imageUrl = c.image_prompt ? `https://image.pollinations.ai/prompt/${encodeURIComponent(c.image_prompt)}?width=1200&height=600&nologo=true` : '';
     return `
         <div class="formatted-content formatted-content--email">
             ${c.subject_line ? `<div class="fc__email-field"><span class="fc__email-label">📌 Konu:</span> <strong>${escHtml(c.subject_line)}</strong></div>` : ''}
             ${c.preview_text ? `<div class="fc__email-field"><span class="fc__email-label">👁️ Ön İzleme:</span> ${escHtml(c.preview_text)}</div>` : ''}
             <hr class="fc__divider">
-            ${imageUrl ? `<div class="fc__generated-image"><img src="${imageUrl}" alt="AI Generated Header" loading="lazy" /></div>` : ''}
             ${c.greeting ? `<p class="fc__greeting">${escHtml(c.greeting)}</p>` : ''}
             ${bodySections.map(s => `
                 <div class="fc__email-section">
                     ${s.heading ? `<h4 class="fc__email-heading">${escHtml(s.heading)}</h4>` : ''}
-                    ${s.content ? `<p class="fc__email-text">${escHtml(s.content).replace(/\\n/g, '<br>')}</p>` : ''}
+                    ${s.content ? `<div class="fc__email-text">${formatMultilineText(s.content, true)}</div>` : ''}
                 </div>
             `).join('')}
             ${c.cta_text ? `<div class="fc__email-cta"><button class="fc__email-cta-btn">${escHtml(c.cta_text)}</button></div>` : ''}
-            ${c.closing ? `<p class="fc__closing">${escHtml(c.closing).replace(/\\n/g, '<br>')}</p>` : ''}
+            ${c.closing ? `<div class="fc__closing">${formatMultilineText(c.closing, true)}</div>` : ''}
         </div>`;
 }
 
 function formatWebBannerContent(c) {
-    const imageUrl = c.image_prompt ? `https://image.pollinations.ai/prompt/${encodeURIComponent(c.image_prompt)}?width=1200&height=400&nologo=true` : '';
     return `
         <div class="formatted-content formatted-content--banner">
-            ${imageUrl ? `<div class="fc__generated-image"><img src="${imageUrl}" alt="AI Generated Banner" loading="lazy" /></div>` : ''}
+            ${getPreviewImageHtml(c.image_prompt, 1200, 400, 'Ürün Görseli', 'web_banner')}
             ${c.main_headline ? `<h2 class="fc__banner-headline">${escHtml(c.main_headline)}</h2>` : ''}
             ${c.sub_headline ? `<p class="fc__banner-subheadline">${escHtml(c.sub_headline)}</p>` : ''}
-            ${c.body_copy ? `<p class="fc__banner-body">${escHtml(c.body_copy)}</p>` : ''}
+            ${c.body_copy ? `<div class="fc__banner-body">${formatMultilineText(c.body_copy, true)}</div>` : ''}
             ${c.cta_text ? `<button class="fc__banner-cta">${escHtml(c.cta_text)}</button>` : ''}
             ${c.banner_sizes?.length ? `<div class="fc__banner-meta"><span class="fc__meta-label">📐 Banner Boyutları:</span> ${c.banner_sizes.map(s => `<span class="fc__meta-tag">${escHtml(s)}</span>`).join('')}</div>` : ''}
             ${c.visual_direction ? `<div class="fc__visual"><span class="fc__visual-label">🎨 Görsel Yönlendirme:</span> ${escHtml(c.visual_direction)}</div>` : ''}
